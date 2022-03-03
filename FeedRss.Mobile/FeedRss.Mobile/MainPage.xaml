@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FeedRss.Mobile.MainPage"
+             BackgroundColor="#ffff"
+          NavigationPage.HasNavigationBar="false">
+
+    <StackLayout>
+
+
+        <Grid BackgroundColor="#c63b5b" HeightRequest="75" Margin="0" >
+            <ImageButton  BorderColor="Transparent" BackgroundColor="Transparent" Source="rss.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <ImageButton BorderColor="Transparent" BackgroundColor="Transparent" Margin="15" Clicked="btAdicionar_Clicked" x:Name="btAdicionar"  Source="add.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <ImageButton BorderColor="Transparent" BackgroundColor="Transparent" Margin="70,15,0,15" Clicked="btEditar_Clicked" x:Name="btEditar"  Source="edit.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" VerticalOptions="Center"/>
+            <ImageButton BorderColor="Transparent" BackgroundColor="Transparent" Margin="15" Clicked="btBack_Clicked" x:Name="btBack"  Source="arrow.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" VerticalOptions="Center" IsVisible="false"/>
+            <ImageButton BorderColor="Transparent" BackgroundColor="Transparent" Margin="15" x:Name="btNotis" Clicked="btNotis_Clicked"  Source="bell.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="End" VerticalOptions="Center"/>
+            
+            
+        </Grid>
+
+        <Grid >
+            <Picker x:Name="cbFeedTitle" SelectedIndex="1" SelectedItem="1" HeightRequest="70" Margin="10,0,10,0" HorizontalTextAlignment="Center" FontSize="17" VerticalOptions="End" BackgroundColor="#fff"/>
+        </Grid>
+        
+        <Grid IsVisible="true" x:Name="lvGrid">
+
+            <ListView
+            x:Name="NewsFeedList"
+            HasUnevenRows="True"
+            IsPullToRefreshEnabled="False"
+            
+            ItemTapped="ListView_OnItemTapped"
+            ItemsSource="{Binding RSSFeed}"
+            
+            Margin="0,10,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image  Source="{Binding Thumbnail}"
+                                WidthRequest="80"
+                                x:Name="img">
+                                </Image>
+
+                                <StackLayout Grid.Column="1" Padding="5">
+                                    <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Medium"
+                                    Text="{Binding Title}"
+                                    x:Name="labTitle"
+                                        />
+                                    <Label LineBreakMode="TailTruncation" Text="{Binding Description}" x:Name="labDesc"/>
+                                    <Label
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Author}"
+                                    TextColor="IndianRed" 
+                                    x:Name="labAuthor"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+
+        <Grid x:Name="AddFeedGrid" IsVisible="false" >
+            <StackLayout>
+                <Entry x:Name="tbAddFeedName" Placeholder="Nome do feed" Margin="20,20,20,0" PlaceholderColor="#c63b5b"  TextColor="#c63b5b"/>
+                <Entry x:Name="tbAddFeedLink" Placeholder="Link do feed" Margin="20,20,20,0" PlaceholderColor="#c63b5b" TextColor="#c63b5b"/>
+                <Entry x:Name="tbAddFeedPC" Placeholder="Palavras Chave" Margin="20,20,20,0" PlaceholderColor="#c63b5b" TextColor="#c63b5b"/>
+
+                <Button x:Name="btAddFeedConfirm" Clicked="btAddFeedConfirm_Clicked" Margin="40,40,40,20" Text="Confirmar" Background="#c63b5b" TextColor="#fff" FontSize="18" FontAttributes="Bold" CornerRadius="15" HeightRequest="60" />
+
+            </StackLayout>
+        </Grid>
+
+        <Grid x:Name="EditFeedGrid" IsVisible="false" >
+            <StackLayout>
+                
+                <Picker x:Name="cbFeedTitleEdit"  SelectedIndex="1" SelectedItem="1" HeightRequest="50" Margin="40,0,40,0" HorizontalTextAlignment="Center" FontSize="20" VerticalOptions="End" BackgroundColor="#fff"/>
+                <Picker x:Name="cbChooseEdit"  SelectedIndex="1" SelectedItem="1" HeightRequest="50" Margin="40,0,40,0" HorizontalTextAlignment="Center" FontSize="20" VerticalOptions="End" BackgroundColor="#fff"/>
+                <Entry x:Name="tbEditFeedName"  Placeholder="Nome do feed" Margin="20,20,20,0" PlaceholderColor="#c63b5b"  TextColor="#c63b5b"/>
+                <Entry x:Name="tbEditFeedLink" Placeholder="Link do feed" Margin="20,20,20,0" PlaceholderColor="#c63b5b" TextColor="#c63b5b"/>
+                <Entry x:Name="tbEditFeedPC" Placeholder="Palavras Chave" Margin="20,20,20,0" PlaceholderColor="#c63b5b" TextColor="#c63b5b"/>
+
+                <Button x:Name="btEditFeedConfirm" Clicked="btEditFeedConfirm_Clicked" Margin="40,40,40,20" Text="Confirmar" Background="#c63b5b" TextColor="#fff" FontSize="18" FontAttributes="Bold" CornerRadius="15" HeightRequest="60" />
+                <Button x:Name="btDeleteFeed" Clicked="btDeleteFeed_Clicked" Margin="40,5,40,20" Text="Remover Feed" Background="#fff" TextColor="#c63b5b" FontSize="18" FontAttributes="Bold" CornerRadius="15" HeightRequest="60" />
+            </StackLayout>
+        </Grid>
+
+    </StackLayout>
+</ContentPage>

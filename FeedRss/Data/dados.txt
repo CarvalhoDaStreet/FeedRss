@@ -1,0 +1,8 @@
+Programaçao;http://csharphelper.com/blog/feed/;C#
+Diarias;https://www.rtp.pt/noticias/rss/pais;Covid
+Desporto;https://www.rtp.pt/noticias/rss/desporto;Ricardo Formula
+Cultura;https://www.rtp.pt/noticias/rss/cultura;Festival
+Modalidades;http://feeds.ojogo.pt/OJ-Modalidades;Atletismo Salvador ciclista
+Teste2;http://feeds.ojogo.pt/OJ-Internacional;Uruguai Costa
+Gerais;https://www.rtp.pt/noticias/rss;Tóquio Costa
+teste3;http://csharphelper.com/blog/feed/;

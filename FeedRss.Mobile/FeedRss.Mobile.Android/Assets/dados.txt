@@ -1,0 +1,3 @@
+Cultura;https://www.rtp.pt/noticias/rss/cultura ;Festival 
+Diarias;https://www.rtp.pt/noticias/rss/pais ;Portugal
+Desporto;https://www.rtp.pt/noticias/rss/desporto ;Futebol

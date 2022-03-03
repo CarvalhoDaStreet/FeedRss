@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FeedRss.Mobile.NotisPage"
+             NavigationPage.HasNavigationBar="false">
+
+    <StackLayout>
+
+
+        <Grid BackgroundColor="#c63b5b" HeightRequest="75" Margin="0" >
+            <ImageButton  BorderColor="Transparent" BackgroundColor="Transparent" Source="rss.png" HeightRequest="40" WidthRequest="40" HorizontalOptions="Center" VerticalOptions="Center"/> 
+            <ImageButton BorderColor="Transparent" BackgroundColor="Transparent" Margin="15" Clicked="btBack_Clicked" x:Name="btBack"  Source="arrow.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" VerticalOptions="Center" IsVisible="true"/>
+           
+        </Grid>
+
+        <Grid >
+            <Picker x:Name="cbFeedTitle" SelectedIndex="1" SelectedItem="1" HeightRequest="70" Margin="10,0,10,0" HorizontalTextAlignment="Center" FontSize="17" VerticalOptions="End" BackgroundColor="#fff"/>
+        </Grid>
+
+       <Grid IsVisible="true" x:Name="lvGrid">
+
+            <ListView
+            x:Name="NewsFeedList"
+            HasUnevenRows="True"
+            IsPullToRefreshEnabled="False"
+            IsRefreshing="{Binding IsBusy}"
+            ItemTapped="ListView_OnItemTapped"
+            ItemsSource="{Binding RSSFeed}"
+            RefreshCommand="{Binding RefreshNewsFeedCommand}"
+            Margin="0,10,0,0">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image  Source="{Binding Thumbnail}"
+                                WidthRequest="80"
+                                x:Name="img">
+                                </Image>
+
+                               
+
+
+                                <StackLayout Grid.Column="1" Padding="5">
+                                    <Label
+                                    FontAttributes="Bold"
+                                    FontSize="Small"
+                                    Text="{Binding Title}"
+                                    x:Name="labTitle"
+                                       Margin="10,0,30,0" 
+                                        MaxLines="2"
+                                        />
+                                    <Label LineBreakMode="TailTruncation" Text="{Binding Description}" x:Name="labDesc" Margin="10,0,30,0" 
+                                        MaxLines="2"/>
+                                    <Label
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Author}"
+                                    TextColor="IndianRed" 
+                                    x:Name="labAuthor"/>
+                                    <Button Grid.Column="1" x:Name="RemoveNoti"  FontAttributes="Bold"  Margin="0" Text="delete" Background="#c63b5b" TextColor="#ffff"  Clicked="RemoveNoti_Clicked_1"/> 
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            </Grid>
+
+
+    </StackLayout>
+
+
+</ContentPage>

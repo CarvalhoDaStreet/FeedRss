@@ -1,0 +1,105 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FeedRss"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" x:Class="FeedRss.MainWindow"
+        mc:Ignorable="d"
+        Title="Feed Rss" Height="450" Width="900" Background="#1d3557" BorderBrush="#1d3557">
+    <Grid Margin="0,0,0,0" Background="#ffff">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="4*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="6*" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Feeds" FontSize="22" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" FontWeight="Bold" Foreground="#c63b5b" />
+        <Separator Height="1" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Margin="0" Background="#8888"/>
+        <Border Width="1" Grid.Column="0" Grid.RowSpan="2" HorizontalAlignment="Right" Background="#8888"/>
+        <ComboBox x:Name="cbFeedTitle" SelectedIndex="0" Margin="10,0,0,0" Foreground="#c63b5b" FontSize="17" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Medium" Grid.Column="0"  Style="{StaticResource ComboBoxFlatStyle}" />
+
+        <Menu Grid.Column="0" Grid.Row="1" Margin="10,20,10,10" Background="#ffff" BorderThickness="0"  >
+            <MenuItem Header="Definições de Feeds" VerticalContentAlignment="Center" FontSize="15" FontWeight="Normal" Background="#ffff" >
+                <MenuItem x:Name="btAddFeed" Header="Adicionar Feed" VerticalContentAlignment="Center" FontSize="12" FontWeight="Normal" Click="btAddFeed_Click"/>
+                <MenuItem x:Name="btEditFeed" Click="btEditFeed_Click" Header="Editar Feed" VerticalContentAlignment="Center" FontSize="12" FontWeight="Normal" />
+            </MenuItem>
+            <MenuItem Header="Definições do Feed" VerticalContentAlignment="Center" FontSize="15" FontWeight="Normal" Background="#ffff" Margin="0,10,0,0" >
+                <MenuItem x:Name="btListPC" Click="btListPC_Click" Header="As minhas Palavras Chave" VerticalContentAlignment="Center" FontSize="12" FontWeight="Normal"/>
+            </MenuItem>
+
+        </Menu>
+
+        <TextBlock x:Name="lvMyPc"  VerticalAlignment="Bottom" Width="180" Height="30" Margin="40" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"  />
+
+        <materialDesign:Card x:Name="feedCard" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,0,10,30" UniformCornerRadius="10" Visibility="Visible">
+            <Grid Margin="0,0,0,0" Background="#c63b5b" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+
+
+                <ListView Name="lstFeedItems"
+                     Grid.ColumnSpan="2"
+                     MouseDoubleClick="lstFeedItems_MouseDoubleClick"
+                         BorderThickness="0"
+                         >
+                </ListView>
+                
+                <WebBrowser  x:Name="NewsShow"   Visibility="Hidden" HorizontalAlignment="Center" VerticalAlignment="Center" Navigated="NewsShow_Navigated" /> 
+
+
+            </Grid>
+        </materialDesign:Card>
+
+        
+        <materialDesign:Card x:Name="AddFeedCard" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,0,10,80" UniformCornerRadius="10" Visibility="Hidden">
+            <Grid Margin="0,0,0,0" Background="#c63b5b" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="0*" />
+                </Grid.ColumnDefinitions>
+
+                <materialDesign:PackIcon x:Name="btCloseAddFeed" MouseDown="btCloseAddFeed_MouseDown"  Kind="Close" Foreground="#ffff" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Right" Width="30" Height="30"/>
+                <StackPanel x:Name="spAddFeed" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#c63b5b" Visibility="Visible">
+                <TextBlock  Text="Adicionar Feed" Foreground="#fff" FontSize="18" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" />
+                <TextBox x:Name="tbAddFeedTitle"  Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Insira um titulo para o feed" TextWrapping="Wrap"  Width="165" IsEnabled="True"  Height="18" BorderThickness="0,0,0,2" BorderBrush="White" Background="Transparent" Foreground="white" Visibility="Visible" Grid.Column="0"/>
+                <TextBox x:Name="tbAddFeedLink"  Margin="50,20" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Insira o link do feed" TextWrapping="Wrap"  Width="165" IsEnabled="True" Height="18" BorderThickness="0,0,0,2" BorderBrush="White" Background="Transparent" Foreground="white" Visibility="Visible" Grid.Column="0"/>
+                <TextBox x:Name="tbAddFeedPC"  Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Insira as palavras-chaves" TextWrapping="Wrap"  Width="165" IsEnabled="True" Height="18" BorderThickness="0,0,0,2" BorderBrush="White" Background="Transparent" Foreground="white" Visibility="Visible" Grid.Column="0"/>
+                <Button x:Name="btAddFeedConfirm" BorderThickness="0" FontSize="15" Content="Confirmar" Margin="90,20" HorizontalAlignment="Center"  VerticalAlignment="Bottom" IsEnabled="True" Click="btAddFeedConfirmar_Click" Width="110" Height="50" Visibility="Visible" FontWeight="Bold" Grid.Column="0" Background="#ffff" Foreground="#c63b5b"/>
+               
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:Card x:Name="EditFeedCard" Grid.Column="1" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10,0,10,50" UniformCornerRadius="10" Visibility="Hidden">
+            <Grid Margin="0,0,0,0" Background="#c63b5b" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="0*" />
+                </Grid.ColumnDefinitions>
+
+                <materialDesign:PackIcon x:Name="btCloseEditFeed" MouseDown="btCloseEditFeed_MouseDown"  Kind="Close" Foreground="#ffff" VerticalAlignment="Top" Margin="10" HorizontalAlignment="Right" Width="30" Height="30"/>
+                <StackPanel x:Name="spEditFeed" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center" Background="#c63b5b" Visibility="Visible">
+                    <TextBlock  Text="Editar Feed" Foreground="#fff" FontSize="18" Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" />
+                    <ComboBox x:Name="cbEdit" Margin="10,0,0,0" Foreground="#000" FontSize="17" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" FontWeight="Medium" Grid.Column="0" />
+                    <TextBox x:Name="tbEditFeedTitle"  Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Edite o titulo do feed" TextWrapping="Wrap"  Width="165" IsEnabled="True"  Height="18" BorderThickness="0,0,0,2" BorderBrush="White" Background="Transparent" Foreground="white" Visibility="Visible" Grid.Column="0"/>
+                    <TextBox x:Name="tbEditFeedLink"  Margin="50,15" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Edite o link do feed" TextWrapping="Wrap"  Width="165" IsEnabled="True" Height="18" BorderThickness="0,0,0,2" BorderBrush="White" Background="Transparent" Foreground="white" Visibility="Visible" Grid.Column="0"/>
+                    <TextBox x:Name="tbEditFeedPC"  Margin="50,10" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Insira novas palavras-chaves" TextWrapping="Wrap"  Width="165" IsEnabled="True" Height="18" BorderThickness="0,0,0,2" BorderBrush="White" Background="Transparent" Foreground="white" Visibility="Visible" Grid.Column="0"/>
+                    <Button x:Name="btEditFeedConfirm" FontSize="15"  Content="Confirmar" Margin="90,10" HorizontalAlignment="Center"  VerticalAlignment="Bottom" IsEnabled="True" Click="btEditFeedConfirm_Click" Width="100" Height="50" BorderThickness="0" Visibility="Visible" FontWeight="Bold" Grid.Column="0" Background="#ffff" Foreground="#c63b5b"/>
+                    <Button x:Name="btRemoveFeed" FontSize="13" Content="Remover Feed" IsEnabled="True" Click="btRemoveFeed_Click"  Width="100" Height="30" Visibility="Visible" FontWeight="Bold"  Background="#c63b5b" Foreground="#fff" BorderThickness="0"/>
+
+                </StackPanel>
+            </Grid>
+        </materialDesign:Card>
+
+        <materialDesign:PackIcon x:Name="btNotis" MouseDown="btNotis_MouseDown"  Kind="BellOutline" Foreground="#c63b5b" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,40,0" Width="30" Height="30"/>
+        <materialDesign:PackIcon x:Name="btClose" MouseDown="btClose_MouseDown" Visibility="Hidden"  Kind="Close" Foreground="#c63b5b" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10,0,12,0" Width="30" Height="30"/>
+        <TextBlock Text="12" x:Name="tbnotis" FontSize="15" HorizontalAlignment="Right" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" FontWeight="Bold" Foreground="#000" Margin="0,0,15,0"/>
+
+    </Grid>
+</Window>

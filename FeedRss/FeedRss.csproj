@@ -1,0 +1,21 @@
+﻿
+<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.1.0" />
+    <PackageReference Include="Microsoft.SyndicationFeed.ReaderWriter" Version="1.0.2" />
+    <PackageReference Include="System.ServiceModel.Syndication" Version="5.0.0" />
+    <PackageReference Include="System.ServiceModel.Web" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Include="App.xaml" />
+  </ItemGroup>
+
+</Project>
